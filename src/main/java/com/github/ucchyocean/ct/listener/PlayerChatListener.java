@@ -49,6 +49,15 @@ public class PlayerChatListener implements Listener {
             event.setMessage(newMessage);
             return;
         }
+        // '>' で始まる文字列はGLOBALとして扱う
+        if ( event.getMessage().startsWith(">") ) {
+            String newMessage = event.getMessage();
+            if ( config.isShowJapanizeGlobalChat() ) {
+                newMessage = addJapanize(newMessage); // Japanize化
+            }
+            event.setMessage(newMessage);
+            return;
+        }
 
         // チームチャット無効なら、何もせずに抜ける
         if ( !config.isTeamChatMode() ) {
