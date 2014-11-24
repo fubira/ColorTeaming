@@ -8,6 +8,7 @@ package com.github.ucchyocean.ct.listener;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
@@ -34,7 +35,7 @@ public class PlayerChatListener implements Listener {
      * Playerがチャットを送信したときに発生するイベント
      * @param event
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOW)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
 
         // GLOBALマーカーが付いていたら、/g コマンドを経由してきたので、
@@ -42,6 +43,15 @@ public class PlayerChatListener implements Listener {
         ColorTeamingConfig config = plugin.getCTConfig();
         if ( event.getMessage().startsWith(GLOBAL_CHAT_MARKER) ) {
             String newMessage = event.getMessage().substring(GLOBAL_CHAT_MARKER.length());
+            if ( config.isShowJapanizeGlobalChat() ) {
+                newMessage = addJapanize(newMessage); // Japanize化
+            }
+            event.setMessage(newMessage);
+            return;
+        }
+        // '>' で始まる文字列はGLOBALとして扱う
+        if ( event.getMessage().startsWith(">") ) {
+            String newMessage = event.getMessage();
             if ( config.isShowJapanizeGlobalChat() ) {
                 newMessage = addJapanize(newMessage); // Japanize化
             }
