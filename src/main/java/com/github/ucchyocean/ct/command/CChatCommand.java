@@ -64,6 +64,16 @@ public class CChatCommand implements TabExecutor {
             config.saveConfig();
             sender.sendMessage(ChatColor.RED + "チームチャットのOPへの表示をオフにします。");
             return true;
+        } else if ( args[0].equalsIgnoreCase("audon") || args[0].equalsIgnoreCase("audcopyon") ) {
+            config.setAudienceDisplayMode(true);
+            config.saveConfig();
+            sender.sendMessage(ChatColor.RED + "チームチャットを観客にも表示します。");
+            return true;
+        } else if ( args[0].equalsIgnoreCase("audoff") || args[0].equalsIgnoreCase("audcopyoff") ) {
+            config.setAudienceDisplayMode(false);
+            config.saveConfig();
+            sender.sendMessage(ChatColor.RED + "チームチャットの観客への表示をオフにします。");
+            return true;
         } else if ( args[0].equalsIgnoreCase("logon") ) {
             config.setTeamChatLogMode(true);
             config.saveConfig();
