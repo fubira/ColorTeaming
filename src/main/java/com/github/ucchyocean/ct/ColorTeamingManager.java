@@ -509,6 +509,18 @@ public class ColorTeamingManager implements ColorTeamingAPI {
                 }
             }
         }
+
+        // どのチームにも所属していないプレイヤー(観客)に送信する
+        if ( config.isAudienceDisplayMode() ) {
+            for ( Player p : plugin.getServer().getOnlinePlayers() ) {
+                if ( p.isOnline() && !playersToSend.contains(p.getPlayer()) ) {
+                    if (scoreboard.getPlayerTeam(p) == null) {
+                        playersToSend.add(p.getPlayer());
+                    }
+                }
+            }
+        }
+
         for ( Player p : playersToSend ) {
             p.sendMessage(partyMessage);
         }

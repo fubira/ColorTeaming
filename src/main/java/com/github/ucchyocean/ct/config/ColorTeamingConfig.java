@@ -33,6 +33,9 @@ public class ColorTeamingConfig {
     /** チームチャットのOP傍聴オンオフ */
     private boolean OPDisplayMode;
 
+    /** チームチャットのOP傍聴オンオフ */
+    private boolean audienceDisplayMode;
+
     /** チームチャットのロギング オンオフ */
     private boolean teamChatLogMode;
 
@@ -138,6 +141,7 @@ public class ColorTeamingConfig {
 
         ctconfig.teamChatMode = config.getBoolean("teamChatMode", false);
         ctconfig.OPDisplayMode = config.getBoolean("opDisplayMode", false);
+        ctconfig.audienceDisplayMode = config.getBoolean("audienceDisplayMode", false);
         ctconfig.teamChatLogMode = config.getBoolean("teamChatLogMode", true);
         ctconfig.teamChatFormat = config.getString("teamChatFormat",
                 "&a[%team&a]%prefix<%name>%suffix %message");
@@ -211,6 +215,7 @@ public class ColorTeamingConfig {
         // 設定のデシリアライズ
         config.set("teamChatMode", teamChatMode);
         config.set("opDisplayMode", OPDisplayMode);
+        config.set("audienceDisplayMode", audienceDisplayMode);
         config.set("teamChatLogMode", teamChatLogMode);
         config.set("teamChatFormat", teamChatFormat);
         config.set("friendlyFire", friendlyFire);
@@ -254,6 +259,10 @@ public class ColorTeamingConfig {
 
     public boolean isOPDisplayMode() {
         return OPDisplayMode;
+    }
+
+    public boolean isAudienceDisplayMode() {
+        return audienceDisplayMode;
     }
 
     public boolean isTeamChatLogMode() {
@@ -362,6 +371,10 @@ public class ColorTeamingConfig {
 
     public void setOPDisplayMode(boolean isOPDisplayMode) {
         this.OPDisplayMode = isOPDisplayMode;
+    }
+
+    public void setAudienceDisplayMode(boolean isAudienceDisplayMode) {
+        this.audienceDisplayMode = isAudienceDisplayMode;
     }
 
     public void setTeamChatLogMode(boolean isTeamChatLogMode) {
