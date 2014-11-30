@@ -115,6 +115,12 @@ public class ColorTeamingConfig {
      *  パケット再送信実行のディレイ。0ならパケットを送信しない。*/
     private int teleportVisiblePacketSendDelay;
 
+    /** カスタムキルログを有効にするかどうか */
+    private boolean enableCustomKilllog;
+
+    /** カスタムキルログのフォーマット設定 */
+    private String customKilllogFormat;
+
     /**
      * config.ymlの読み出し処理。
      * @return 読み込んだ ColorTeamingConfig オブジェクト
@@ -189,6 +195,10 @@ public class ColorTeamingConfig {
         ctconfig.teleportVisiblePacketSendDelay =
                 config.getInt("teleportVisiblePacketSendDelay", 20);
 
+        ctconfig.enableCustomKilllog = config.getBoolean("enableCustomKilllog", false);
+        ctconfig.customKilllogFormat = config.getString("customKilllogFormat",
+                "%killer [%weapon&f] %deader");
+
         return ctconfig;
     }
 
@@ -240,6 +250,8 @@ public class ColorTeamingConfig {
         config.set("showJapanizeGlobalChat", showJapanizeGlobalChat);
         config.set("showJapanizeTeamChat", showJapanizeTeamChat);
         config.set("teleportDelay", teleportDelay);
+        config.set("enableCustomKilllog", enableCustomKilllog);
+        config.set("customKilllogFormat", customKilllogFormat);
 
         // 保存処理
         try {
@@ -479,6 +491,14 @@ public class ColorTeamingConfig {
 
     public void setPriorBedRespawn(boolean priorBedRespawn) {
         this.priorBedRespawn = priorBedRespawn;
+    }
+
+    public boolean isEnableCustomKilllog() {
+        return enableCustomKilllog;
+    }
+
+    public String getCustomKilllogFormat() {
+        return customKilllogFormat;
     }
 
     /**
